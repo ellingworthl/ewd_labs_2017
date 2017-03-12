@@ -1,16 +1,23 @@
-// Load the http module to create an http server.
-import http from 'http';
+import express from 'express';
+//added import for config
 import config from './config';
-import greeting  from './greeting'
+//Add greeting module
+import greeting from './greeting';
+//create an express app
+const app = express();
 
-// Configure our HTTP server to respond with Hello World to all requests.
-var server = http.createServer((req, res) => {
-  const language = req.headers['accept-language'];
+// Configure the app to serve up content from public directory
+app.use(express.static('public'));
+
+//add route for /greeting
+app.get('/greeting',(req, res)=>{
+  const language = req.headers["accept-language"];
   const resp_language = greeting[language]?language:'en';
-  res.writeHead(200, {'Content-Type': 'text/plain' , 'Content-Language': resp_language});
+  res.writeHead(200, {"Content-Type": "text/plain"});
   res.end(greeting[resp_language]);
 });
 
-server.listen(config.port);
+app.listen(config.port)
 
-console.log("Server running at " + config.port);
+// Put a friendly message on the terminal
+console.log("Server running on port " +config.port);
