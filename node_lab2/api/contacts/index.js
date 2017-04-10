@@ -3,12 +3,17 @@ import express from 'express';
 import contacts from './contacts';
 
 const router = express.Router();
+//var router = express.Router();
 
 router.get('/', (req, res) => {
   res.send({ contacts: contacts });
 });
 
 router.post('/', (req, res) => {
+        //console.log("Received: " + req.body)
+        //var newContact 
+        //newContact = req.body;
+        //console.log(newContact);
         let newContact = req.body;
         if (newContact){
           contacts.push({name: newContact.name, address : newContact.address, phone_number: newContact.phone_number }) ;
