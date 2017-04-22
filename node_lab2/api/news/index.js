@@ -42,4 +42,17 @@ router.get('/:id', (req, res) => {
 
 
 });
+
+//missed from original week8 'API' upload
+router.post('/:id/upvote', (req, res) => {
+     const id = req.params.id;
+     const result = stubAPI.upvote(id);
+	 		console.log(result)
+            if (result) {
+                 return  res.status(200).send({message: `Post ${id} Upvoted`});
+            }
+            return    res.status(404).send({message: `Unable to find Post ${id}`});
+
+});
+
 export default router;
