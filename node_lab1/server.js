@@ -9,7 +9,7 @@ const server = express();
 server.use('/api/contacts', contactsRouter);
 server.use(express.static('public'));
 server.use(bodyParser.json());
-//server.use(bodyParser.urlencoded());
+//server.use(bodyParser.urlencoded());// replaced to fix expressjs-error-body-parser-deprecated
 server.use(bodyParser.urlencoded({extended: true}));
 
 server.listen(config.port, config.host, () => {
